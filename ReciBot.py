@@ -286,7 +286,7 @@ ICONO_PATH = os.path.join(BASE_DIR, "app.ico")
 
 #-----------------------------------------------Configuración de la página--------------------------------------------------
 
-st.set_page_config(page_title="ReciBot", page_icon=ICONO_PATH, layout="centered")
+st.set_page_config(page_title="ReciBot-BETA", page_icon=ICONO_PATH, layout="centered")
 # Footer or info section
 st.markdown("---")  # horizontal separator line
 
@@ -343,7 +343,7 @@ seccion = st.sidebar.selectbox("MENU", opciones)
 
 if seccion == "Bienvenida":
     st.markdown("---")
-    st.subheader("")
+    st.subheader("Bienvenido a la BETA")
     st.subheader("¡Ya puedes empezar a utilizar nuestra interfaz!")
     st.markdown(
         """
