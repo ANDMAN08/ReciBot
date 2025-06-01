@@ -627,16 +627,6 @@ elif seccion == "Ingresar basura para estadística":
 
             # Mostrar el último registro guardado en forma tabular para revisión inmediata
             st.dataframe(df_resultado.tail(1))
-                        # Convertir el DataFrame completo a CSV
-            csv = df_resultado.to_csv(index=False).encode('utf-8')
-
-            # Botón para descargar el archivo CSV
-            st.download_button(
-                label="📥 Descargar CSV",
-                data=csv,
-                file_name='registro_basura.csv',
-                mime='text/csv'
-            )
 
 
 # --------------------------------------------------Análisis estadístico--------------------------------------------------------
@@ -692,6 +682,18 @@ elif seccion == "mostrar basura":
         fig = grafica_barras_agrupadas_por_usuario(df)
         st.markdown("### 👥 Comparación entre usuarios")
         st.pyplot(fig)
+
+        # Convertir todo el DataFrame a CSV
+        csv_completo = df.to_csv(index=False).encode('utf-8')
+
+        # Botón para descargar el archivo CSV completo
+        st.download_button(
+            label="📥 Descargar todos los datos en CSV",
+            data=csv_completo,
+            file_name='datos_basura_completo.csv',
+            mime='text/csv'
+        )
+
 
 # Pie de página con información de autoría y fecha de actualización
 st.markdown("""
