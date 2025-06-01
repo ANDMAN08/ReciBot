@@ -58,15 +58,6 @@ def procesar_datos_basura(datos: list, kg_por_bolsa: float = 3.0, fecha_referenc
     """
     Procesa la lista de registros de residuos y acumula las cantidades para periodos semanal, mensual y anual.
     Calcula además el número estimado de bolsas requeridas, dado un peso por bolsa.
-
-    Parámetros:
-    - datos (list): Lista de diccionarios con registros de residuos.
-    - kg_por_bolsa (float): Peso estándar (kg) considerado para cada bolsa de basura.
-    - fecha_referencia (str, opcional): Fecha en formato "YYYY-MM-DD" para definir el periodo de cálculo. 
-      Si no se provee, se usa la fecha actual.
-
-    Retorna:
-    - tuple: Cuatro diccionarios con acumulados de bolsas, semanal, mensual y anual, respectivamente.
     """
     if fecha_referencia is None:
         fecha_ref = datetime.today()
@@ -75,10 +66,10 @@ def procesar_datos_basura(datos: list, kg_por_bolsa: float = 3.0, fecha_referenc
 
     tipos = ["organico", "plastico", "papel", "vidrio", "metal", "no_reciclable"]
 
-    semanal = {}
-    mensual = {}
-    anual = {}
-    bolsas = {}
+    semanal = defaultdict(float)
+    mensual = defaultdict(float)
+    anual = defaultdict(float)
+    bolsas = defaultdict(float)
 
     for registro in datos:
         fecha_registro = datetime.strptime(registro["fecha"], "%Y-%m-%d")
@@ -93,7 +84,7 @@ def procesar_datos_basura(datos: list, kg_por_bolsa: float = 3.0, fecha_referenc
             for tipo in tipos:
                 mensual[tipo] += registro.get(tipo, 0.0)
 
-        # Acumula valores semanales basados en la semana ISO
+        # Acumula valores semanales
         if (fecha_registro.isocalendar()[0] == fecha_ref.isocalendar()[0] and
             fecha_registro.isocalendar()[1] == fecha_ref.isocalendar()[1]):
             for tipo in tipos:
@@ -106,8 +97,8 @@ def procesar_datos_basura(datos: list, kg_por_bolsa: float = 3.0, fecha_referenc
         mensual[tipo] = round(mensual[tipo], 2)
         anual[tipo] = round(anual[tipo], 2)
 
-    return bolsas, dict(semanal), dict(mensual), dict(anual)
-
+    return dict(bolsas), dict(semanal), dict(mensual), dict(anual)
+    
 # ----------------------Función 3: almacenamiento de datos procesados en archivo CSV-----------------------------------------------
 def guardar_datos_en_csv(datos: dict, bolsas: dict,
                          semanal: dict, mensual: dict, anual: dict,
