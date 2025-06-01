@@ -640,6 +640,17 @@ elif seccion == "mostrar basura":
     # Cargar los datos existentes en un DataFrame
     df = cargar_datos_csv(ruta_csv)
 
+    # Convertir todo el DataFrame a CSV
+    csv_completo = df.to_csv(index=False).encode('utf-8')
+
+        # Botón para descargar el archivo CSV completo
+    st.download_button(
+        label="📥 Descargar todos los datos en CSV",
+        data=csv_completo,
+        file_name='datos_basura_completo.csv',
+        mime='text/csv'
+        )
+
     # Validar si existen datos para mostrar
     if df.empty:
         st.warning("⚠️ Aún no hay datos almacenados.")
@@ -682,17 +693,6 @@ elif seccion == "mostrar basura":
         fig = grafica_barras_agrupadas_por_usuario(df)
         st.markdown("### 👥 Comparación entre usuarios")
         st.pyplot(fig)
-
-        # Convertir todo el DataFrame a CSV
-        csv_completo = df.to_csv(index=False).encode('utf-8')
-
-        # Botón para descargar el archivo CSV completo
-        st.download_button(
-            label="📥 Descargar todos los datos en CSV",
-            data=csv_completo,
-            file_name='datos_basura_completo.csv',
-            mime='text/csv'
-        )
 
 
 # Pie de página con información de autoría y fecha de actualización
