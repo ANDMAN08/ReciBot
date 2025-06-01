@@ -74,9 +74,9 @@ def procesar_datos_basura(datos: list, kg_por_bolsa: float = 3.0, fecha_referenc
 
     tipos = ["organico", "plastico", "papel", "vidrio", "metal", "no_reciclable"]
 
-    semanal = defaultdict(float)
-    mensual = defaultdict(float)
-    anual = defaultdict(float)
+    semanal = {}
+    mensual = {}
+    anual = {}
     bolsas = {}
 
     for registro in datos:
