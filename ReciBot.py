@@ -16,6 +16,7 @@
 import pandas as pd                 # Manejo avanzado de datos tabulares (DataFrames) y persistencia en CSV
 import streamlit as st             # Framework para crear la interfaz web interactiva de la aplicación
 import os                         # Interacción con el sistema de archivos para gestión de archivos y directorios
+from collections import defaultdict
 import matplotlib.pyplot as plt   # Generación de gráficos y visualizaciones estadísticas para análisis de datos
 import streamlit_survey as ss     # (Opcional) Soporte para encuestas y formularios avanzados dentro de Streamlit
 from datetime import datetime, timedelta, date  # Gestión y manipulación precisa de fechas y tiempos
