@@ -627,6 +627,17 @@ elif seccion == "Ingresar basura para estadística":
 
             # Mostrar el último registro guardado en forma tabular para revisión inmediata
             st.dataframe(df_resultado.tail(1))
+                        # Convertir el DataFrame completo a CSV
+            csv = df_resultado.to_csv(index=False).encode('utf-8')
+
+            # Botón para descargar el archivo CSV
+            st.download_button(
+                label="📥 Descargar CSV",
+                data=csv,
+                file_name='registro_basura.csv',
+                mime='text/csv'
+            )
+
 
 # --------------------------------------------------Análisis estadístico--------------------------------------------------------
 
